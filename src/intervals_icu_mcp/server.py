@@ -125,15 +125,6 @@ mcp.tool(
     },
 )(get_recent_activities)
 mcp.tool(
-    name="icu_get_activities_by_date",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_activities_by_date)
-mcp.tool(
     name="icu_get_activity_details",
     annotations={
         "readOnlyHint": True,
@@ -151,51 +142,6 @@ mcp.tool(
         "openWorldHint": True,
     },
 )(search_activities)
-mcp.tool(
-    name="icu_search_activities_full",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(search_activities_full)
-mcp.tool(
-    name="icu_get_activities_around",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_activities_around)
-mcp.tool(
-    name="icu_update_activity",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(update_activity)
-mcp.tool(
-    name="icu_update_activity_streams",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": True,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(update_activity_streams)
-mcp.tool(
-    name="icu_bulk_create_manual_activities",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": True,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(bulk_create_manual_activities)
 if _DELETE_MODE == "full":
     mcp.tool(
         name="icu_delete_activity",
@@ -206,33 +152,6 @@ if _DELETE_MODE == "full":
             "openWorldHint": True,
         },
     )(delete_activity)
-mcp.tool(
-    name="icu_download_activity_file",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(download_activity_file)
-mcp.tool(
-    name="icu_download_fit_file",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(download_fit_file)
-mcp.tool(
-    name="icu_download_gpx_file",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(download_gpx_file)
 
 # Register activity analysis tools
 mcp.tool(
@@ -310,33 +229,6 @@ mcp.tool(
 
 # Register athlete tools
 mcp.tool(
-    name="icu_list_athletes",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(list_athletes)
-mcp.tool(
-    name="icu_get_athlete_profile",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_athlete_profile)
-mcp.tool(
-    name="icu_update_athlete_notes",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(update_athlete_notes)
-mcp.tool(
     name="icu_get_fitness_summary",
     annotations={
         "readOnlyHint": True,
@@ -345,15 +237,6 @@ mcp.tool(
         "openWorldHint": True,
     },
 )(get_fitness_summary)
-mcp.tool(
-    name="icu_get_fitness_chart",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_fitness_chart)
 
 # Register wellness tools
 mcp.tool(
@@ -385,116 +268,10 @@ mcp.tool(
 )(update_wellness)
 
 # Register event/calendar tools
-mcp.tool(
-    name="icu_get_calendar_events",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_calendar_events)
-mcp.tool(
-    name="icu_get_upcoming_workouts",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_upcoming_workouts)
-mcp.tool(
-    name="icu_get_event",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_event)
-mcp.tool(
-    name="icu_get_annual_training_plan",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_annual_training_plan)
-mcp.tool(
-    name="icu_create_event",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(create_event)
-mcp.tool(
-    name="icu_update_event",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(update_event)
 if _DELETE_MODE in ("safe", "full"):
-    mcp.tool(
-        name="icu_delete_event",
-        annotations={
-            "readOnlyHint": False,
-            "destructiveHint": True,
-            "idempotentHint": True,
-            "openWorldHint": True,
-        },
-    )(delete_event)
-mcp.tool(
-    name="icu_bulk_create_events",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(bulk_create_events)
-mcp.tool(
-    name="icu_bulk_update_event_access",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(bulk_update_event_access)
+    pass
 if _DELETE_MODE in ("safe", "full"):
-    mcp.tool(
-        name="icu_bulk_delete_events",
-        annotations={
-            "readOnlyHint": False,
-            "destructiveHint": True,
-            "idempotentHint": True,
-            "openWorldHint": True,
-        },
-    )(bulk_delete_events)
-mcp.tool(
-    name="icu_duplicate_events",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(duplicate_events)
-mcp.tool(
-    name="icu_apply_training_plan",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": True,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(apply_training_plan)
+    pass
 
 # Register performance/curve tools
 mcp.tool(
@@ -525,139 +302,10 @@ mcp.tool(
     },
 )(get_pace_curves)
 
-# Register workout library tools
-mcp.tool(
-    name="icu_get_workout_library",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_workout_library)
-mcp.tool(
-    name="icu_get_workouts_in_folder",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_workouts_in_folder)
-mcp.tool(
-    name="icu_create_workout",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(create_workout)
-mcp.tool(
-    name="icu_update_workout",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(update_workout)
-if _DELETE_MODE in ("safe", "full"):
-    mcp.tool(
-        name="icu_delete_workout",
-        annotations={
-            "readOnlyHint": False,
-            "destructiveHint": True,
-            "idempotentHint": True,
-            "openWorldHint": True,
-        },
-    )(delete_workout)
-mcp.tool(
-    name="icu_bulk_create_workouts",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(bulk_create_workouts)
-mcp.tool(
-    name="icu_create_workout_folder",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(create_workout_folder)
-# Safe mode registers it too; the tool itself refuses folders that still hold workouts.
-if _DELETE_MODE in ("safe", "full"):
-    mcp.tool(
-        name="icu_delete_workout_folder",
-        annotations={
-            "readOnlyHint": False,
-            "destructiveHint": True,
-            "idempotentHint": True,
-            "openWorldHint": True,
-        },
-    )(delete_workout_folder)
 
 # Register gear management tools
-mcp.tool(
-    name="icu_get_gear_list",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_gear_list)
-mcp.tool(
-    name="icu_create_gear",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(create_gear)
-mcp.tool(
-    name="icu_update_gear",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(update_gear)
 if _DELETE_MODE in ("safe", "full"):
-    mcp.tool(
-        name="icu_delete_gear",
-        annotations={
-            "readOnlyHint": False,
-            "destructiveHint": True,
-            "idempotentHint": True,
-            "openWorldHint": True,
-        },
-    )(delete_gear)
-mcp.tool(
-    name="icu_create_gear_reminder",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(create_gear_reminder)
-mcp.tool(
-    name="icu_update_gear_reminder",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(update_gear_reminder)
+    pass
 
 # Register sport settings tools
 mcp.tool(
@@ -699,72 +347,10 @@ if _DELETE_MODE == "full":
     )(delete_sport_settings)
 
 # Register activity message tools
-mcp.tool(
-    name="icu_get_activity_messages",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_activity_messages)
-mcp.tool(
-    name="icu_add_activity_message",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(add_activity_message)
 
 # Register custom item tools
-mcp.tool(
-    name="icu_get_custom_items",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_custom_items)
-mcp.tool(
-    name="icu_get_custom_item",
-    annotations={
-        "readOnlyHint": True,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(get_custom_item)
-mcp.tool(
-    name="icu_create_custom_item",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": False,
-        "openWorldHint": True,
-    },
-)(create_custom_item)
-mcp.tool(
-    name="icu_update_custom_item",
-    annotations={
-        "readOnlyHint": False,
-        "destructiveHint": False,
-        "idempotentHint": True,
-        "openWorldHint": True,
-    },
-)(update_custom_item)
 if _DELETE_MODE == "full":
-    mcp.tool(
-        name="icu_delete_custom_item",
-        annotations={
-            "readOnlyHint": False,
-            "destructiveHint": True,
-            "idempotentHint": True,
-            "openWorldHint": True,
-        },
-    )(delete_custom_item)
+    pass
 
 
 # MCP Resources - Provide ongoing context
