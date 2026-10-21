@@ -31,21 +31,21 @@ class TestInMemoryTransport:
             assert client.is_connected()
 
     async def test_all_default_mode_tools_registered(self):
-        """Default delete_mode=safe registers 66 tools (3 destructive tools gated)."""
+        """Fork local/trim-tools: modo safe regista 21 tools (destrutivos e não usados cortados)."""
         async with Client(mcp) as client:
             tools = await client.list_tools()
             names = {t.name for t in tools}
-            assert len(names) == 66
-            # Spot-check tools from different modules / tiers
+            assert len(names) == 21
+            # Spot-check tools mantidos
             assert "icu_get_recent_activities" in names
-            assert "icu_get_athlete_profile" in names
-            assert "icu_get_fitness_chart" in names
-            assert "icu_bulk_create_events" in names  # Tier 2 coverage addition
-            assert "icu_duplicate_events" in names
-            assert "icu_bulk_update_event_access" in names
-            assert "icu_get_activity_messages" in names  # Activity messages
-            assert "icu_get_custom_items" in names  # Custom items
+            assert "icu_get_fitness_summary" in names
+            assert "icu_get_wellness_data" in names
+            assert "icu_search_activities" in names
             assert "icu_update_sport_settings" in names
+            # Cortados no fork
+            assert "icu_get_fitness_chart" not in names
+            assert "icu_bulk_create_events" not in names
+            assert "icu_list_athletes" not in names
             assert "icu_apply_sport_settings" not in names  # endpoint removed upstream
 
     async def test_sport_settings_tools_expose_indoor_ftp(self):
@@ -238,5 +238,5 @@ class TestHTTPTransport:
                 tools_body = (await tools_resp.aread()).decode()
                 tools_payload = self._parse_sse_response(tools_body)
                 tool_names = {t["name"] for t in tools_payload["result"]["tools"]}
-                assert len(tool_names) == 66  # safe mode default
+                assert len(tool_names) == 21  # safe mode default, fork com trim
                 assert "icu_get_recent_activities" in tool_names

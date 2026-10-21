@@ -70,20 +70,10 @@ class TestConditionalRegistration:
         tools = asyncio.run(server_module.mcp.list_tools())  # type: ignore[attr-defined]
         return {t.name for t in tools}
 
-    def test_safe_mode_registers_event_and_gear_only(self, monkeypatch):
+    def test_safe_mode_registers_no_delete_tools_in_trimmed_fork(self, monkeypatch):
+        # Fork local/trim-tools: os tools de apagar eventos, gear e workouts foram cortados;
+        # em modo safe não sobra nenhum.
         monkeypatch.setenv("INTERVALS_ICU_DELETE_MODE", "safe")
-        names = self._tool_names(_reload_server())
-        assert "icu_delete_event" in names
-        assert "icu_bulk_delete_events" in names
-        assert "icu_delete_gear" in names
-        assert "icu_delete_workout" in names
-        assert "icu_delete_workout_folder" in names
-        assert "icu_delete_activity" not in names
-        assert "icu_delete_sport_settings" not in names
-        assert "icu_delete_custom_item" not in names
-
-    def test_full_mode_registers_all_delete_tools(self, monkeypatch):
-        monkeypatch.setenv("INTERVALS_ICU_DELETE_MODE", "full")
         names = self._tool_names(_reload_server())
         for tool in (
             "icu_delete_event",
@@ -95,7 +85,23 @@ class TestConditionalRegistration:
             "icu_delete_sport_settings",
             "icu_delete_custom_item",
         ):
+            assert tool not in names, f"{tool} não devia estar registado em modo safe"
+
+    def test_full_mode_registers_the_kept_delete_tools(self, monkeypatch):
+        # Fork local/trim-tools: em modo full só ficam os de activity e sport settings.
+        monkeypatch.setenv("INTERVALS_ICU_DELETE_MODE", "full")
+        names = self._tool_names(_reload_server())
+        for tool in ("icu_delete_activity", "icu_delete_sport_settings"):
             assert tool in names, f"expected {tool} registered in full mode"
+        for tool in (
+            "icu_delete_event",
+            "icu_bulk_delete_events",
+            "icu_delete_gear",
+            "icu_delete_workout",
+            "icu_delete_workout_folder",
+            "icu_delete_custom_item",
+        ):
+            assert tool not in names, f"{tool} foi cortado do fork"
 
     def test_none_mode_registers_no_delete_tools(self, monkeypatch):
         monkeypatch.setenv("INTERVALS_ICU_DELETE_MODE", "none")
